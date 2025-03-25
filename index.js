@@ -15,7 +15,11 @@ const bot = new TelegramBot(token, {polling: true});
 let chatArray = []
 
 const app = express()
-app.use(cors());
+app.use(cors({
+    origin: "https://deluxe-faloodeh-cc924f.netlify.app", // Разрешаем запросы с фронта
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+}));
 app.use(express.json());
 
 app.use('/api', router)
