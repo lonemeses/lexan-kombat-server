@@ -6,12 +6,12 @@ const {Energy, Score, User, Price} = require('../models/models')
 class UserController {
     
     async create(req, res, next) {
-        const {userId, firstName, chatId, photoUrl} = req.body;
+        const {userId, firstName, chatId, photoUrl, isAdmin} = req.body;
         const user = await User.findOne({where: {userId}})
         if (user) {
             return next(ApiError.badRequest('User already created.'))
         } else {
-            const user = await User.create({userId, firstName, chatId, photoUrl})
+            const user = await User.create({userId, firstName, chatId, photoUrl, isAdmin})
             const score = await Score.create({user_id: userId})
             const energy = await Energy.create({user_id: userId})
             const price = await Price.create({user_id: userId})
@@ -38,7 +38,7 @@ class UserController {
     async get(req, res) {
         const {id} = req.params
         const result = []
-        const user =  await User.findOne({where: {userId: id}, attributes: ["userId", "firstName", "photoUrl"]})
+        const user =  await User.findOne({where: {userId: id}, attributes: ["userId", "firstName", "photoUrl", "isAdmin"]})
         const score = await Score.findOne({where: {user_id: id}, attributes: ["score", "scoreTapNumber", "updatedAt"]})
         const energy = await Energy.findOne({where: {user_id: id}, attributes: ["energy", "energyAddOnSeconds", "energyLossOnTap", "updatedAt"]})
         const price = await Price.findOne({where: {user_id: id}, attributes: ["vodka", "vadim", "ruslan"]})

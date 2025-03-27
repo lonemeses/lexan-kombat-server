@@ -6,6 +6,7 @@ const User = seqilize.define('user', {
     firstName: {type: DataTypes.STRING, allowNull: false},
     chatId: {type: DataTypes.INTEGER, allowNull: false, unique: true},
     photoUrl: {type: DataTypes.STRING, allowNull: false, unique: true},
+    isAdmin: {type: DataTypes.BOOLEAN, allowNull: false, default: false},
 })
 const Score = seqilize.define('scores', {
     score: {type: DataTypes.INTEGER, defaultValue: 0},
