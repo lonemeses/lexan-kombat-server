@@ -4,7 +4,7 @@ const {DataTypes} = require('sequelize')
 const User = seqilize.define('user', {
     userId: {type: DataTypes.INTEGER, allowNull: false, unique: true, primaryKey: true},
     firstName: {type: DataTypes.STRING, allowNull: false},
-    chatId: {type: DataTypes.INTEGER, allowNull: false, unique: true},
+    chatId: {type: DataTypes.INTEGER, allowNull: false, unique: true, defaultValue: 0},
     photoUrl: {type: DataTypes.STRING, allowNull: false, unique: true},
     isAdmin: {type: DataTypes.BOOLEAN, allowNull: false, default: false},
 })
